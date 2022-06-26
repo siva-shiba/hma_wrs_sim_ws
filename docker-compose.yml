@@ -1,0 +1,22 @@
+# version: "2.4"
+services:
+  hma_wrs_sim_ws:
+    build: .
+    image: hma_wrs_sim_ws:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    environment:
+      ROS_MASTER_URI:
+      ROS_IP:
+    network_mode: "host"
+    volumes:
+      - ./src:/home/ros_ws/hma/hma_wrs_sim_ws/src
+      # - ./entrypoint.sh:/entrypoint.sh
+    # command: tail -f /dev/null
+    # entrypoint: /entrypoint.sh
+    stdin_open: true
+    tty: true
