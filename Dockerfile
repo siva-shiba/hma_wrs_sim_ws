@@ -46,6 +46,9 @@ RUN cd $HOME/setup/deb && \
     dpkg -i ros-melodic-hsrb-moveit-plugins_0.6.3-2.bionic.20220309.2325.+0000.29cd601_amd64.deb && \
     dpkg -i ros-melodic-hsrb-moveit_0.6.3-2.bionic.20220309.2325.+0000.29cd601_amd64.deb
 
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc
+
+# COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+# RUN chmod +x /docker-entrypoint.sh
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["bash"]
