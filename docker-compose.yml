@@ -16,6 +16,7 @@ services:
     volumes:
       - ./src:/home/ros_ws/hma/hma_wrs_sim_ws/src
       - ./entrypoints:/entrypoints
+      - ./.bashrc_hma:/root/.bashrc_hma
     entrypoint: ["bash"]
     stdin_open: true
     tty: true
