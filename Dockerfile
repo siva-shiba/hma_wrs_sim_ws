@@ -46,7 +46,13 @@ RUN cd $HOME/setup/deb && \
     dpkg -i ros-melodic-hsrb-moveit-plugins_0.6.3-2.bionic.20220309.2325.+0000.29cd601_amd64.deb && \
     dpkg -i ros-melodic-hsrb-moveit_0.6.3-2.bionic.20220309.2325.+0000.29cd601_amd64.deb
 
-RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc
+# bashrc settings
+RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc && \
+    echo "source /root/.bashrc_hma" >> /root/.bashrc
+
+RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc && \
+    echo "source /home/ros_ws/hma/cv_bridge_ws/install/setup.bash --extend" >> /root/.bashrc && \
+    echo "source /home/ros_ws/hma/hma_wrs_sim_ws/devel/setup.bash" >> /root/.bashrc
 
 # COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 # RUN chmod +x /docker-entrypoint.sh

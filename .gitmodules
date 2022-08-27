@@ -12,7 +12,7 @@
 	url = https://github.com/hsr-project/tmc_control_msgs.git
 [submodule "src/04_sim_docker/hsrb_robocup_dspl_docker"]
 	path = src/04_sim_docker/hsrb_robocup_dspl_docker
-	url = git@github.com:Hibikino-Musashi-Home/hsrb_robocup_dspl_docker.git
+	url = https://github.com/Hibikino-Musashi-Home/hsrb_robocup_dspl_docker.git
 [submodule "src/01_common/hma_yolact/hma_yolact_pkg/yolact_edge"]
 	path = src/01_common/hma_yolact/hma_yolact_pkg/yolact_edge
 	url = https://github.com/haotian-liu/yolact_edge.git
