@@ -5,6 +5,5 @@ then
       ROS_MASTER_URI="http://"$DOCKER_URI":11311"
 fi
 
+echo $ROS_MASTER_URI
 WS_CONTAINER_NAME="hma_wrs_sim_ws-hma_wrs_sim_ws-1"
-
-docker exec -it --env ROS_MASTER_URI=$ROS_MASTER_URI $WS_CONTAINER_NAME /entrypoints/roscore.sh
