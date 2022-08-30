@@ -9,7 +9,8 @@ ROS_IP=`hostname -I | cut -d' ' -f1`
 
 WS_CONTAINER_NAME="hma_wrs_sim_ws-hma_wrs_sim_ws-1"
 
-docker exec -it \ 
+docker exec \
+      -it \
       --env ROS_MASTER_URI=$ROS_MASTER_URI \
       --env ROS_IP=$ROS_IP \
       $WS_CONTAINER_NAME \
