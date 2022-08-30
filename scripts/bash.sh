@@ -4,7 +4,15 @@ if [ ${#DOCKER_URI} -gt 0 ]
 then
       ROS_MASTER_URI="http://"$DOCKER_URI":11311"
 fi
+ROS_IP=`hostname -I | cut -d' ' -f1`
 
 WS_CONTAINER_NAME="hma_wrs_sim_ws-hma_wrs_sim_ws-1"
 
-docker exec -it --env ROS_MASTER_URI=$ROS_MASTER_URI --env TERM=xterm-color --workdir /home/ros_ws/hma/hma_wrs_sim_ws $WS_CONTAINER_NAME /entrypoints/bash.sh
+docker exec \
+      -it \
+      --env ROS_MASTER_URI=$ROS_MASTER_URI \
+      --env ROS_IP=$ROS_IP \
+      --env TERM=xterm-color \
+      --workdir /home/ros_ws/hma/hma_wrs_sim_ws \
+      $WS_CONTAINER_NAME \
+      /entrypoints/bash.sh
