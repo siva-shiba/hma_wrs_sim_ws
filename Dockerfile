@@ -54,6 +54,14 @@ RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc && \
     echo "source /home/ros_ws/hma/cv_bridge_ws/install/setup.bash --extend" >> /root/.bashrc && \
     echo "source /home/ros_ws/hma/hma_wrs_sim_ws/devel/setup.bash" >> /root/.bashrc
 
+
+# Please edit from here
+
+RUN apt install ros-melodic-rqt
+
+
+# Do not edit from here
+
 # COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 # RUN chmod +x /docker-entrypoint.sh
 # ENTRYPOINT ["/docker-entrypoint.sh"]
