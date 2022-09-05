@@ -57,7 +57,7 @@ RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc && \
 
 # Please edit from here
 
-RUN apt install ros-melodic-rqt
+RUN apt-get -y install ros-melodic-rqt
 
 
 # Do not edit from here
