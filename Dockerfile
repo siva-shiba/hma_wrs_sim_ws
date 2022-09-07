@@ -54,11 +54,14 @@ RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc && \
     echo "source /home/ros_ws/hma/cv_bridge_ws/install/setup.bash --extend" >> /root/.bashrc && \
     echo "source /home/ros_ws/hma/hma_wrs_sim_ws/devel/setup.bash" >> /root/.bashrc
 
-
 # Please edit from here
-
-RUN apt-get -y install ros-melodic-rqt
-
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN apt-key del 7fa2af80 && \
+    curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb
+RUN apt-get -y update
+RUN apt-get -y install ros-melodic-rqt-*
+RUN apt-get -y install ros-melodic-hector-slam
 
 # Do not edit from here
 
