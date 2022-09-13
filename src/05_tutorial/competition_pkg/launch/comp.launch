@@ -36,8 +36,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Recognition -->
     <include file="$(find hma_yolact_pkg)/launch/yolact_server.launch">
+        <!-- normal config -->
         <arg name="cfg" default="task1_config"/>
         <arg name="weight" default="$(find hma_yolact_pkg)/io/weights/task1/best.pth"/>
+        <!-- competition config -->
+        <!-- <arg name="cfg" default="task_comp_config"/> -->
+        <!-- <arg name="weight" default="$(find hma_yolact_pkg)/io/weights/task_comp/best.pth"/> -->
+        
         <arg name="th" default="0.01"/>
         <arg name="top_k" default="20"/>
         <arg name="nms_th" default="0.5"/>
