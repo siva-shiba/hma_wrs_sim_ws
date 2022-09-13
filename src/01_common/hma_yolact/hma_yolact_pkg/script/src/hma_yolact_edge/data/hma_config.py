@@ -72,6 +72,31 @@ task2b_config = yolact_resnet50_config.copy({
     "torch2trt_prediction_module_int8": False,
 })
 
+task_comp = hma_base.copy({
+    'name': 'YCBdataset for task1 20210606',
+
+    'class_names': ycb_config["task_comp"]["class_names"],
+    'show_names': ycb_config["task_comp"]["show_names"]
+})
+
+task_comp_config = yolact_resnet50_config.copy({
+    "name": "task_comp",
+
+    "dataset": task_comp,
+    "num_classes": len(task_comp.class_names) + 1,
+
+    "max_iter": 800000,
+
+    "torch2trt_backbone": False,
+    "torch2trt_backbone_int8": False,
+    "torch2trt_protonet": False,
+    "torch2trt_protonet_int8": False,
+    "torch2trt_fpn": False,
+    "torch2trt_fpn_int8": False,
+    "torch2trt_prediction_module": False,
+    "torch2trt_prediction_module_int8": False,
+})
+
 def set_hma_cfg(config_name:str):
     global cfg
 
