@@ -11,3 +11,7 @@ Prepare the environment required for the task.
 
 ### [teleop_node](docs/teleop_node.md)
 Teleoperate HSR on the simulator.
+
+### [shooting_node](docs/shooting_node.md)
+Recording HSR simulator.
+Scoring simulator.
