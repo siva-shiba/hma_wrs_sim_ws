@@ -10,19 +10,16 @@
 
 
 # ステートマシン変更点
-変更しているチームは以下を参考に開始前に`/sim_time_supervisor/run_enable`にTrueをPublishするようにする（Startのexecuteを書き換える）．
+変更しているチームは以下を参考に開始前に`/sim_time_supervisor/run_enable`にTrueをPublishするようにする（Start classのexecuteを書き換える）．
 ```
-    def execute(
-        self,
-        userdata
-    ):
-        # タイマースタート
-        raw_input("Start >>> ")
-        run_enable = Bool(True)
-        self._pub_time_supervisor.publish(run_enable)
-        rospy.sleep(1.0)
+    def __init__(self, lib={}):
+        (一部抜粋)
+        self.pub_time_supervisor = rospy.Publisher(
+            "/manage_task_time_node/run_enable", Bool, queue_size=1)
 
-
+    def execute(self, userdata):
+        # start task timer
+        self.pub_time_supervisor.publish(Bool(True))
         return "next"
 ```
 
