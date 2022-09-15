@@ -124,7 +124,7 @@ for i in range(len(files_0)):
     font = "./fonts/corpround-ver2-font/Corporate-Logo-Rounded.ttf"
     pil_main = cv2pil(cv_main)
     if int(data[data_i][0]) == i:
-        print("Data updated.")
+        # print("Data updated.")
         score = int(data[data_i][1])
         hit = True if int(data[data_i][2]) == 1 else False
         drop = True if int(data[data_i][3]) == 1 else False
