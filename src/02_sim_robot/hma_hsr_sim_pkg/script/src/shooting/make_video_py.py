@@ -125,7 +125,7 @@ for i in range(len(files_0)):
     pil_main = cv2pil(cv_main)
     if int(data[data_i][0]) == i:
         # print("Data updated.")
-        score = int(data[data_i][1])
+        score = str(data[data_i][1])
         hit = True if int(data[data_i][2]) == 1 else False
         drop = True if int(data[data_i][3]) == 1 else False
         obj_id = int(data[data_i][4])
