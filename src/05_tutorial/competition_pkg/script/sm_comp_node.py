@@ -32,69 +32,61 @@ import os
 import roslib
 import smach
 import smach_ros
-
-import sm_comp_main as sm
-
-sys.path.append(roslib.packages.get_pkg_dir("hma_ii_pkg") + "/script/import")
-from common_import import *
-from ros_import import *
-
-sys.path.append(roslib.packages.get_pkg_dir("hma_sm_pkg") + "/script/src/lib")
-from libsm import *
+import rospy
 
 sys.path.append(roslib.packages.get_pkg_dir("hma_lib_pkg") + "/script/src/lib")
-from libutil import *
-from libopencv import *
-from libtf import *
-from libpub import *
-from libaction import *
+import libutil
+import libopencv
+import libtf
+import libpub
+import libaction
 
 sys.path.append(roslib.packages.get_pkg_dir("hma_yolact_pkg") + "/script/src/lib")
-from libyolact import *
+import libyolact
 
 sys.path.append(roslib.packages.get_pkg_dir("hma_hsr_nav_pkg") + "/script/src/lib")
-from libhsrnav import *
+import libhsrnav
 
 sys.path.append(roslib.packages.get_pkg_dir("hma_hsr_sim_lib_pkg") + "/script/src/lib")
-from libhsrutil import *
-from libhsrpub import *
-from libhsrsub import *
-from libhsraction import *
-from libhsrmoveit import *
+import libhsrutil
+import libhsrpub
+import libhsrsub
+import libhsraction
+import libhsrmoveit
+
+import sm_comp_main as sm
 
 
 class StateMachine:
     def __init__(self):
-        libsm = LibSM()
 
-        libutil = LibUtil()
-        libopencv = LibOpenCV()
-        libtf = LibTF()
-        libpub = LibPub()
-        libaction = LibAction(libtf)
-        libyolact = LibYolact(True)
-
-        libhsrutil = LibHSRUtil(libutil, libtf)
-        libhsrnav = LibHSRNav(libutil, libtf, libhsrutil)
-        libhsrpub = LibHSRPub()
-        libhsrsub = LibHSRSub(libutil, libopencv)
-        libhsraction = LibHSRAction()
-        libhsrmoveit = LibHSRMoveit(libtf, libhsrutil, libhsrpub)
-
-        self.lib = {"sm": libsm,
-                    "util": libutil,
-                    "opencv": libopencv,
-                    "tf": libtf,
-                    "pub": libpub,
-                    "action": libaction,
-                    "yolact": libyolact,
-                    "hsrutil": libhsrutil,
-                    "hsrnav": libhsrnav,
-                    "hsrpub": libhsrpub,
-                    "hsrsub": libhsrsub,
-                    "hsraction": libhsraction,
-                    "hsrmoveit": libhsrmoveit}
         self.robot_descriptor = self.lib["util"].get_robot_descriptor()
+        _libutil = libutil.LibUtil()
+        _libopencv = libopencv.LibOpenCV()
+        _libtf = libtf.LibTF()
+        _libpub = libpub.LibPub()
+        _libaction = libaction.LibAction(_libtf)
+        _libyolact = libyolact.LibYolact(True)
+
+        _libhsrutil = libhsrutil.LibHSRUtil(_libutil, _libtf)
+        _libhsrnav = libhsrnav.LibHSRNav(_libutil, _libtf, _libhsrutil)
+        _libhsrpub = libhsrpub.LibHSRPub()
+        _libhsrsub = libhsrsub.LibHSRSub(_libutil, _libopencv)
+        _libhsraction = libhsraction.LibHSRAction()
+        _libhsrmoveit = libhsrmoveit.LibHSRMoveit(_libtf, _libhsrutil, _libhsrpub)
+
+        self.lib = {"util": _libutil,
+                    "opencv": _libopencv,
+                    "tf": _libtf,
+                    "pub": _libpub,
+                    "action": _libaction,
+                    "yolact": _libyolact,
+                    "hsrutil": _libhsrutil,
+                    "hsrnav": _libhsrnav,
+                    "hsrpub": _libhsrpub,
+                    "hsrsub": _libhsrsub,
+                    "hsraction": _libhsraction,
+                    "hsrmoveit": _libhsrmoveit}
         rospy.sleep(1.0)
 
         self.ssm = smach.StateMachine(outcomes=["exit"])

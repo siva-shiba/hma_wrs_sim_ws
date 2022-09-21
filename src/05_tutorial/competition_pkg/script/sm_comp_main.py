@@ -33,9 +33,7 @@ import rospy
 import smach
 import inspect
 
-sys.path.append(roslib.packages.get_pkg_dir("hma_ii_pkg") + "/script/import")
-from common_import import *
-from ros_import import *
+from std_msgs.msg import Bool
 
 
 class Init(smach.State):
