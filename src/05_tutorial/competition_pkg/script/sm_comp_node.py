@@ -139,7 +139,10 @@ class StateMachine:
     def delete(self):
         """Destractor."""
         for key in self.lib.keys():
-            self.lib[key].delete()
+            try:
+                self.lib[key].delete()
+            except Exception:
+                pass
         del self.ssm
         return
 
