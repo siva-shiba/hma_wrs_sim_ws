@@ -58,6 +58,13 @@ import sm_comp_main as sm
 
 
 class StateMachine:
+    """Setup state machine.
+    
+    Attributes:
+        lib (dict): Instances of multiple library classes
+        ssm (TYPE): Instance of State machine
+    """
+    
     def __init__(self):
         _libutil = libutil.LibUtil()
         _libopencv = libopencv.LibOpenCV()
@@ -130,6 +137,7 @@ class StateMachine:
         return
 
     def delete(self):
+        """Destractor."""
         for key in self.lib.keys():
             self.lib[key].delete()
         del self.ssm

@@ -35,9 +35,17 @@ from std_msgs.msg import Bool
 
 
 class Init(smach.State):
-    """Initialize state."""
+    """Initialize state class.
+        
+    Set initial values for rosparam, etc., but not done this time.
+    """
     
     def __init__(self, lib={}):
+        """Initialize Init class & state machine pass.
+        
+        Args:
+            lib (dict[str,instance], optional): library instances
+        """
         smach.State.__init__(self, outcomes=["next", "except"])
         self.lib = lib
         return
@@ -47,12 +55,15 @@ class Init(smach.State):
         return 
 
     def execute(self, userdata):
-        """Initialize."""
+        """Initialize execute code."""
         return "next"
 
 
 class Wait4Start(smach.State):
-    """Wait for start state."""
+    """Wait for start state class.
+       
+    Wait for seconds as defined in the launch file. (default is 0)
+    """
     
     def __init__(self, lib={}):
         """Initialize Wait4Start class.
@@ -77,7 +88,7 @@ class Wait4Start(smach.State):
         return
 
     def execute(self, userdata):
-        """Wait for seconds as defined in the launch file."""
+        """Wait for seconds as defined in the launch file. (default is 0)"""
         rospy.loginfo("[" + rospy.get_name() + "]: Wait for start: " + str(self.p_wait_time) + " sec")
         rospy.sleep(float(self.p_wait_time))
         rospy.loginfo("[" + rospy.get_name() + "]: Let's GO!!")
@@ -85,7 +96,10 @@ class Wait4Start(smach.State):
 
 
 class Start(smach.State):
-    """Start state."""
+    """Start state machine class.
+        
+    Publish the countdown flag for the clean up task.
+    """
     
     def __init__(self, lib={}):
         """Initialize State class.
@@ -115,7 +129,10 @@ class Start(smach.State):
 
 
 class Task1(smach.State):
-    """Place object to deposit place state."""
+    """Sample state machine class.
+    
+    Wait 30 seconds for simulator time
+    """
 
     def __init__(self, lib={}):
         """Initialize class.
@@ -133,6 +150,7 @@ class Task1(smach.State):
         return
 
     def execute(self, userdata):
+        """Sample execute code."""
         rospy.sleep(30.0)
         return "next"
 
@@ -156,6 +174,7 @@ class End(smach.State):
         return
 
     def execute(self, userdata):
+        """Exit program at normal."""
         return "end"
 
 
@@ -178,4 +197,5 @@ class Except(smach.State):
         return
 
     def execute(self, userdata):
+        """Exit program in case of error."""
         return "except"
