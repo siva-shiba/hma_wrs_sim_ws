@@ -88,7 +88,7 @@ class Wait4Start(smach.State):
         return
 
     def execute(self, userdata):
-        """Wait for seconds as defined in the launch file. (default is 0)"""
+        """Wait for seconds as defined in the launch file (default is 0)."""
         rospy.loginfo("[" + rospy.get_name() + "]: Wait for start: " + str(self.p_wait_time) + " sec")
         rospy.sleep(float(self.p_wait_time))
         rospy.loginfo("[" + rospy.get_name() + "]: Let's GO!!")
@@ -123,7 +123,7 @@ class Start(smach.State):
         return
 
     def execute(self, userdata):
-        # start task timer
+        """Start task timer."""
         self.pub_time_supervisor.publish(Bool(True))
         return "next"
 

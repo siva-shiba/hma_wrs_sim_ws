@@ -66,6 +66,7 @@ class StateMachine:
     """
     
     def __init__(self):
+        """Load lib class & setup state machine."""
         _libutil = libutil.LibUtil()
         _libopencv = libopencv.LibOpenCV()
         _libtf = libtf.LibTF()
@@ -147,6 +148,7 @@ class StateMachine:
         return
 
     def main(self):
+        """Start State machine."""
         self.ssm.execute()
         return
 
