@@ -27,8 +27,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import sys
-import roslib
 import rospy
 import smach
 import inspect
@@ -41,8 +39,6 @@ class Init(smach.State):
     
     def __init__(self, lib={}):
         smach.State.__init__(self, outcomes=["next", "except"])
-
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
         return
 
@@ -129,7 +125,6 @@ class Task1(smach.State):
         """
         smach.State.__init__(self, outcomes=["next", "except"])
 
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
         return
 
@@ -152,8 +147,6 @@ class End(smach.State):
             lib (dict, optional): library
         """
         smach.State.__init__(self, outcomes=["end"])
-
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
 
         return
@@ -176,8 +169,6 @@ class Except(smach.State):
             lib (dict, optional): library
         """
         smach.State.__init__(self, outcomes=["except"])
-
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
 
         return
