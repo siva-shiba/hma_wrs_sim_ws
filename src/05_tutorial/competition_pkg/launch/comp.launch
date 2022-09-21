@@ -97,15 +97,19 @@ POSSIBILITY OF SUCH DAMAGE.
     <node pkg="tf" type="static_transform_publisher" name="world_to_container_a" args="-2.75 -0.2 0.4 0 0 0 world container_a 10" />
 
     <!-- Time Supervisor -->
-    <arg name="time" default="14.0"/>
+    <arg name="time" default="10.0"/>
     <node pkg="hma_hsr_sim_pkg" type="manage_task_time_node.py" name="manage_task_time_node" output="screen" required="true">
         <param name="/time" type="double" value="$(arg time)"/>
     </node>
 
+    <!-- Rviz -->
+    <arg name="rviz" default="true"/>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find competition_pkg)/rviz/comp.rviz" if="$(arg rviz)"/>
+
     <!-- Object Spawner -->
-    <arg name="prep" default="true"/>
+    <!-- <arg name="prep" default="true"/>
     <arg name="seed" default="-1"/>
-    <arg name="percategory" default="5"/>
+    <arg name="percategory" default="4"/>
     <arg name="obstacles" default="0"/>
     <arg name="perrow" default="0"/>
     <arg name="drawer_open" default="true"/>
@@ -118,9 +122,8 @@ POSSIBILITY OF SUCH DAMAGE.
         <param name="/perrow" type="int" value="$(arg perrow)"/>
         <param name="/drawer_open" type="bool" value="$(arg drawer_open)"/>
         <param name="/delete_prefix" type="str" value="$(arg delete_prefix)"/>
-    </node>
+    </node> -->
 
-    <!-- Rviz -->
-    <arg name="rviz" default="true"/>
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find competition_pkg)/rviz/comp.rviz" if="$(arg rviz)"/>
+    <!-- Shooting -->
+    <!-- <node pkg="hma_hsr_sim_pkg" type="shooting_node.py" name="shooting_node" output="screen" required="true"/> -->
 </launch>
