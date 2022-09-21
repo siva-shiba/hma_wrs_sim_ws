@@ -27,9 +27,19 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+
+"""sample state machine class for competition.
+
+Init       : Initialization state. Set initial values for rosparam, etc.
+Wait4Start : Wait for seconds as defined in the launch file. (default is 0)
+Start      : Start the countdown for the clean up task.
+Task1      : Sample state machine. Wait 30 seconds for simulator time.
+End        : Process when tasks end normally (e.g., when a task is completed).
+Except     : Process when exit in case of some abnormality.
+"""
+
 import rospy
 import smach
-import inspect
 
 from std_msgs.msg import Bool
 
@@ -74,8 +84,6 @@ class Wait4Start(smach.State):
             lib (dict[str,instance], optional): library instances
         """
         smach.State.__init__(self, outcomes=["next", "except"])
-
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
 
         # ROS I/F
@@ -108,8 +116,6 @@ class Start(smach.State):
             lib (dict[str,instance], optional): library instances
         """
         smach.State.__init__(self, outcomes=["next", "except"])
-
-        self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
 
         # ROS I/F
@@ -156,7 +162,10 @@ class Task1(smach.State):
 
 
 class End(smach.State):
-    """End state."""
+    """End state.
+
+    Process when tasks end normally (e.g., when a task is completed).
+    """
 
     def __init__(self, lib={}):
         """Initialize End class.
@@ -179,7 +188,10 @@ class End(smach.State):
 
 
 class Except(smach.State):
-    """Except state."""
+    """Except state.
+
+    Process when exit in case of some abnormality.
+    """
 
     def __init__(self, lib={}):
         """Initialize Except class.
