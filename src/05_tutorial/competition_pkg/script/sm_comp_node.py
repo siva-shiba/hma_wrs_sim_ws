@@ -59,8 +59,6 @@ import sm_comp_main as sm
 
 class StateMachine:
     def __init__(self):
-
-        self.robot_descriptor = self.lib["util"].get_robot_descriptor()
         _libutil = libutil.LibUtil()
         _libopencv = libopencv.LibOpenCV()
         _libtf = libtf.LibTF()
@@ -94,36 +92,36 @@ class StateMachine:
         with self.ssm:
             smach.StateMachine.add(
                 "Init",
-                sm.Init(self.lib, self.robot_descriptor), 
+                sm.Init(self.lib), 
                 transitions={
                     "next": "Wait4Start",
                     "except": "Except"})
             smach.StateMachine.add(
                 "Wait4Start",
-                sm.Wait4Start(self.lib, self.robot_descriptor),
+                sm.Wait4Start(self.lib),
                 transitions={
                     "next": "Start",
                     "except": "Except"})
             smach.StateMachine.add(
                 "Start",
-                sm.Start(self.lib, self.robot_descriptor),
+                sm.Start(self.lib),
                 transitions={
                     "next": "Task1",
                     "except": "Except"})
             smach.StateMachine.add(
                 "Task1",
-                sm.Task1(self.lib, self.robot_descriptor),
+                sm.Task1(self.lib),
                 transitions={
                     "next": "End",
                     "except": "Except"})
             smach.StateMachine.add(
                 "End",
-                sm.End(self.lib, self.robot_descriptor),
+                sm.End(self.lib),
                 transitions={
                     "end": "exit"})
             smach.StateMachine.add(
                 "Except",
-                sm.Except(self.lib, self.robot_descriptor),
+                sm.Except(self.lib),
                 transitions={
                     "except": "exit"})
 

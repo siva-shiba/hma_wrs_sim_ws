@@ -39,12 +39,11 @@ from std_msgs.msg import Bool
 class Init(smach.State):
     """Initialize state."""
     
-    def __init__(self, lib={}, robot_descriptor={}):
+    def __init__(self, lib={}):
         smach.State.__init__(self, outcomes=["next", "except"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
         return
 
     def __del__(self):
@@ -59,18 +58,18 @@ class Init(smach.State):
 class Wait4Start(smach.State):
     """Wait for start state."""
     
-    def __init__(self, lib={}, robot_descriptor={}):
-        """Initialize class.
+    def __init__(self, lib={}):
+        """Initialize Wait4Start class.
+
+            Read the seconds from rosparam. 
         
         Args:
-            lib (dict, optional): library
-            robot_descriptor (dict, optional): robot descriptor
+            lib (dict[str,instance], optional): library instances
         """
         smach.State.__init__(self, outcomes=["next", "except"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
 
         # ROS I/F
         self.p_wait_time = rospy.get_param(rospy.get_name() + "/start_wait_time", 0.0)
@@ -92,18 +91,16 @@ class Wait4Start(smach.State):
 class Start(smach.State):
     """Start state."""
     
-    def __init__(self, lib={}, robot_descriptor={}):
-        """Initialize class.
+    def __init__(self, lib={}):
+        """Initialize State class.
         
         Args:
-            lib (dict, optional): library
-            robot_descriptor (dict, optional): robot descriptor
+            lib (dict[str,instance], optional): library instances
         """
         smach.State.__init__(self, outcomes=["next", "except"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
 
         # ROS I/F
         self.pub_time_supervisor = rospy.Publisher(
@@ -124,20 +121,16 @@ class Start(smach.State):
 class Task1(smach.State):
     """Place object to deposit place state."""
 
-    def __init__(self, lib={}, robot_descriptor={}):
+    def __init__(self, lib={}):
         """Initialize class.
         
         Args:
-            lib (dict, optional): library
-            robot_descriptor (dict, optional): robot descriptor
+            lib (dict[str,instance], optional): library instances
         """
         smach.State.__init__(self, outcomes=["next", "except"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
-
-        self.food_pos = 0
         return
 
     def __del__(self):
@@ -152,18 +145,16 @@ class Task1(smach.State):
 class End(smach.State):
     """End state."""
 
-    def __init__(self, lib={}, robot_descriptor={}):
-        """Initialize class.
+    def __init__(self, lib={}):
+        """Initialize End class.
         
         Args:
             lib (dict, optional): library
-            robot_descriptor (dict, optional): robot descriptor
         """
         smach.State.__init__(self, outcomes=["end"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
 
         return
 
@@ -178,18 +169,16 @@ class End(smach.State):
 class Except(smach.State):
     """Except state."""
 
-    def __init__(self, lib={}, robot_descriptor={}):
-        """Initialize class.
+    def __init__(self, lib={}):
+        """Initialize Except class.
         
         Args:
             lib (dict, optional): library
-            robot_descriptor (dict, optional): robot descriptor
         """
         smach.State.__init__(self, outcomes=["except"])
 
         self.lineno = inspect.currentframe().f_lineno
         self.lib = lib
-        self.robot_descriptor = robot_descriptor
 
         return
 
